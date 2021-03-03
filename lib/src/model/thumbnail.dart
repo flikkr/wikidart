@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 class Thumbnail {
-  final String source;
-  final int width;
-  final int height;
+  final String? source;
+  final int? width;
+  final int? height;
 
   const Thumbnail({
     this.source,
@@ -20,8 +20,6 @@ class Thumbnail {
   }
 
   factory Thumbnail.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-  
     return Thumbnail(
       source: map['source'],
       width: map['width'],

@@ -33,18 +33,18 @@ import 'package:dartpedia/src/model/thumbnail.dart';
 // }
 
 class WikiResponse {
-  final String pageId;
-  final String type;
-  final String displayTitle;
+  final String? pageId;
+  final String? type;
+  final String? displayTitle;
 
-  final Thumbnail thumbnail;
-  final Thumbnail originalImage;
+  final Thumbnail? thumbnail;
+  final Thumbnail? originalImage;
 
-  final String lang;
-  final String description;
-  final String coordinates;
-  final String extract;
-  final String extract_html;
+  final String? lang;
+  final String? description;
+  final String? coordinates;
+  final String? extract;
+  final String? extract_html;
 
   const WikiResponse({
     this.pageId,
@@ -75,8 +75,6 @@ class WikiResponse {
   }
 
   factory WikiResponse.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return WikiResponse(
       pageId: map['pageId'],
       type: map['type'],
