@@ -1,9 +1,6 @@
 import 'dart:convert';
 
-import 'package:collection/collection.dart';
-
 import 'package:dartpedia/src/model/search/search_info.dart';
-import 'package:dartpedia/src/model/thumbnail.dart';
 
 import 'search_result.dart';
 
@@ -34,7 +31,7 @@ class SearchResponse {
 
   Map<String, dynamic> toMap() {
     return {
-      'results': results?.map((x) => x?.toMap())?.toList(),
+      'results': results?.map((x) => x.toMap()).toList(),
       'offset': offset,
       'searchInfo': searchInfo?.toMap(),
     };
