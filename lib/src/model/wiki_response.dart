@@ -74,13 +74,13 @@ class WikiResponse {
     };
   }
 
-  factory WikiResponse.fromMap(Map<String, dynamic> map) {
+  factory WikiResponse.fromMap(Map<String?, dynamic> map) {
     return WikiResponse(
       pageId: map['pageId'],
       type: map['type'],
-      displayTitle: map['displayTitle'],
-      thumbnail: Thumbnail.fromMap(map['thumbnail']),
-      originalImage: Thumbnail.fromMap(map['originalImage']),
+      displayTitle: map['displaytitle'],
+      thumbnail: map['thumbnail'] == null ? null : Thumbnail.fromMap(map['thumbnail']),
+      originalImage: map['originalImage'] == null ? null : Thumbnail.fromMap(map['originalImage']),
       lang: map['lang'],
       description: map['description'],
       coordinates: map['coordinates'],

@@ -1,26 +1,21 @@
-import 'package:dartpedia/src/api_service.dart';
+import 'package:dartpedia/src/dartpedia.dart';
 import 'package:test/test.dart';
 
 void main() {
   test('Getting the summary from the API', () async {
-    var res = await ApiService.getPageSummary('Computer');
+    var res = await Dartpedia.summary('Computer');
     print(res?.extract);
   });
 
   test('Wikipedia search query', () async {
-    var res = await ApiService.getPageSummary('Computer');
-    print(res?.extract);
+    var res = await Dartpedia.searchQuery('Mandela');
+    print(res?.results);
   });
 
-  group('A group of tests', () {
-    // Awesome awesome;
+  test('Using link for debug', () async {
+    var res = await Dartpedia.debugLink(
+        'en.wikipedia.org/w/api.php?action=query&srsearch=Nelson%20Mandela&utf8=&format=json');
 
-    // setUp(() {
-    //   awesome = Awesome();
-    // });
-
-    // test('First Test', () {
-    //   expect(awesome.isAwesome, isTrue);
-    // });
+    print(res?.statusCode);
   });
 }

@@ -25,7 +25,7 @@ class SearchInfo {
 
   Map<String, dynamic> toMap() {
     return {
-      'totalHits': totalHits,
+      'totalhits': totalHits,
       'suggestion': suggestion,
       'suggestionsnippet': suggestionsnippet,
     };
