@@ -39,10 +39,14 @@ class SearchResponse {
 
   factory SearchResponse.fromMap(Map<String, dynamic> map) {
     return SearchResponse(
-      results: map['query']['search'] ? null : List<SearchResult>.from(
-          map['query']['search']?.map((x) => SearchResult.fromMap(x))),
+      results: map['query']['search'] == null
+          ? null
+          : List<SearchResult>.from(
+              map['query']['search']?.map((x) => SearchResult.fromMap(x))),
       offset: map['offset'],
-      searchInfo: SearchInfo.fromMap(map['query']['searchinfo']),
+      searchInfo: map['query']['searchinfo'] == null
+          ? null
+          : SearchInfo.fromMap(map['query']['searchinfo']),
     );
   }
 

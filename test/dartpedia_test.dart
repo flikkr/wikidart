@@ -16,6 +16,6 @@ void main() {
     var res = await Dartpedia.debugLink(
         'en.wikipedia.org/w/api.php?action=query&srsearch=Nelson%20Mandela&utf8=&format=json');
 
-    print(res?.statusCode);
+    print(res?.body);
   });
 }

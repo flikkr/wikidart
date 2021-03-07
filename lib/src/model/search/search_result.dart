@@ -1,18 +1,18 @@
 import 'dart:convert';
 
 class SearchResult {
-  final int? pageId;
-  final String? title;
-  final int? size;
-  final int? wordcount;
-  final String? snippet;
+  final int pageId;
+  final String title;
+  final int size;
+  final int wordcount;
+  final String snippet;
 
   const SearchResult({
-    this.pageId,
-    this.title,
-    this.size,
-    this.wordcount,
-    this.snippet,
+    required this.pageId,
+    required this.title,
+    required this.size,
+    required this.wordcount,
+    required this.snippet,
   });
 
   SearchResult copyWith({
