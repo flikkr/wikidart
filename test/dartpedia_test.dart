@@ -3,8 +3,8 @@ import 'package:test/test.dart';
 
 void main() {
   test('Getting the summary from the API', () async {
-    var res = await Dartpedia.summary('Computer');
-    print(res?.extract);
+    // var res = await Dartpedia.summary('Computer');
+    // print(res?.extract);
   });
 
   test('Wikipedia search query', () async {

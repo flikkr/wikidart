@@ -8,44 +8,33 @@ import 'model/wiki_response.dart';
 /// The search function to use during the wiki search
 enum SearchType {
   nearmatch,
-  text, /*title*/
+  text /*title*/
 }
 
 class Dartpedia {
   static const String _baseUrl = 'en.wikipedia.org';
 
-  // refer to https://en.wikipedia.org/api/rest_v1/#/Page%20content/get_page_
-  // static Future<WikiResponse?> summary(String title) async {
-  //   if (title.isEmpty) throw ArgumentError.notNull();
-  //   var res =
-  //       await http.get(Uri.https(_baseUrl, 'api/rest_v1/page/summary/$title'));
-
-  //   if (res.statusCode == 200) {
-  //     return WikiResponse.fromJson(res.body);
-  //   } else {
-  //     return null;
-  //   }
-  // }
-
+  /// Retrieve a random Wikipedia page
+  ///
   /// refer to
   static Future<WikiResponse?> random() async {
     throw UnimplementedError();
   }
 
-  static Future<WikiResponse?> summary(String title) async {
-    if (title.isEmpty) throw ArgumentError.notNull();
+  /// use https://en.wikipedia.org/w/api.php?action=help
+  static Future<WikiResponse?> summary(int pageId) async {
     var res = await http.get(Uri(
       scheme: 'https',
       host: _baseUrl,
       path: '/w/api.php',
       queryParameters: {
         'action': 'query',
-        'list': 'search',
-        'srsearch': query,
+        'redirects': 1,
         'format': 'json',
-        'srlimit': '$limit',
-        'sroffset': '$offset',
-        'srwhat': searchType.toString().split('.').last,
+        'prop': 'extracts|description|langlinks',
+        'exintro': '',
+        'explaintext': '',
+        'pageids': pageId,
       },
     ));
 
@@ -56,6 +45,11 @@ class Dartpedia {
     }
   }
 
+  /// Start a search query from the provided [query].
+  ///
+  /// [limit] value will set the limit of the number of results returned.
+  /// Use [offset] for pagination (set to 0 by default to get the first page of results).
+  ///
   /// refer to https://www.mediawiki.org/wiki/API:Search#GET_request
   static Future<SearchResponse?> searchQuery(
     String query, {

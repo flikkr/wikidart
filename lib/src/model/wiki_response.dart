@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dartpedia/src/model/thumbnail.dart';
+import 'package:tuple/tuple.dart';
 
 // Format:
 // {
@@ -32,60 +33,49 @@ import 'package:dartpedia/src/model/thumbnail.dart';
 //   }
 // }
 
+/// A class to contain the response from the Wikipedia query.
+///
+/// [pageId] is the unique personal identifier associated to that wiki page.
 class WikiResponse {
-  final String? pageId;
-  final String? type;
-  final String? displayTitle;
-
-  final Thumbnail? thumbnail;
-  final Thumbnail? originalImage;
-
-  final String? lang;
+  final int pageId;
+  final String? title;
   final String? description;
-  final String? coordinates;
   final String? extract;
-  final String? extract_html;
+  final List<Tuple2<String, String>>? langlinks;
 
   const WikiResponse({
-    this.pageId,
-    this.type,
-    this.displayTitle,
-    this.thumbnail,
-    this.originalImage,
-    this.lang,
-    this.description,
-    this.coordinates,
-    this.extract,
-    this.extract_html,
+    required this.pageId,
+    required this.title,
+    required this.description,
+    required this.extract,
+    this.langlinks,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'pageId': pageId,
-      'type': type,
-      'displayTitle': displayTitle,
-      'thumbnail': thumbnail?.toMap(),
-      'originalImage': originalImage?.toMap(),
-      'lang': lang,
+      'title': title,
       'description': description,
-      'coordinates': coordinates,
       'extract': extract,
-      'extract_html': extract_html,
+      'langlinks': langlinks
+          ?.map((x) => {
+                'langcode': x.item1,
+                'searchtitle': x.item2,
+              },)
+          .toList(),
     };
   }
 
-  factory WikiResponse.fromMap(Map<String?, dynamic> map) {
+  factory WikiResponse.fromMap(Map<String, dynamic> map) {
+    Map? path = map['query']['pages'];
+    String key = path?.keys.first;
+
     return WikiResponse(
-      pageId: map['pageId'],
-      type: map['type'],
-      displayTitle: map['displaytitle'],
-      thumbnail: map['thumbnail'] == null ? null : Thumbnail.fromMap(map['thumbnail']),
-      originalImage: map['originalImage'] == null ? null : Thumbnail.fromMap(map['originalImage']),
-      lang: map['lang'],
-      description: map['description'],
-      coordinates: map['coordinates'],
-      extract: map['extract'],
-      extract_html: map['extract_html'],
+      pageId: path?[key]['pageid'],
+      title: path?[key]['title'],
+      description: path?[key]['description'],
+      extract: path?[key]['extract'],
+      langlinks: path?[key]['langlinks'].map((e) => Tuple2(e['lang'], e['*'])),
     );
   }
 

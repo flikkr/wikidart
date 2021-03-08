@@ -1,7 +1,9 @@
-A library for Dart developers.
+# Dartpedia
 
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
+[![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
+<!-- [![Pub](https://img.shields.io/pub/v/gap.svg)](https://pub.dartlang.org/packages/emoji) -->
+
+A simple wrapper for WikiMedia API written in Dart. Allows you to query and retrieve Wikipedia page information.
 
 ## Usage
 
@@ -15,7 +17,14 @@ main() {
 }
 ```
 
-## Features and bugs
+## Features
+
+- [ ] Search (id, title)
+- [ ] Summary
+- [ ] Random
+- [ ] Set page language
+
+## Contributions
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
