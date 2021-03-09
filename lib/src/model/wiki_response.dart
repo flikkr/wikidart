@@ -58,10 +58,12 @@ class WikiResponse {
       'description': description,
       'extract': extract,
       'langlinks': langlinks
-          ?.map((x) => {
-                'langcode': x.item1,
-                'searchtitle': x.item2,
-              },)
+          ?.map(
+            (x) => {
+              'langcode': x.item1,
+              'searchtitle': x.item2,
+            },
+          )
           .toList(),
     };
   }
@@ -75,7 +77,11 @@ class WikiResponse {
       title: path?[key]['title'],
       description: path?[key]['description'],
       extract: path?[key]['extract'],
-      langlinks: path?[key]['langlinks'].map((e) => Tuple2(e['lang'], e['*'])),
+      langlinks: path?[key]['langlinks']
+          ?.map<Tuple2<String, String>>(
+            (e) => Tuple2(e['lang'] as String, e['*'] as String),
+          )
+          .toList(),
     );
   }
 

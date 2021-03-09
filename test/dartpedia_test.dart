@@ -1,21 +1,34 @@
-import 'package:dartpedia/src/dartpedia.dart';
+import 'package:dartpedia/dartpedia.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('Getting the summary from the API', () async {
-    // var res = await Dartpedia.summary('Computer');
-    // print(res?.extract);
+  group('Test group for the summary wiki function', () {
+    test('Getting the summary from Nelson Mandela wiki page', () async {
+      var res = await Dartpedia.summary(30071);
+      expect(res, isNot(equals(null)));
+    });
+
+    test('Retrieving the summary using an invalid page id', () async {
+      var res = await Dartpedia.summary(999);
+      expect(res, equals(null));
+    });
   });
 
-  test('Wikipedia search query', () async {
-    var res = await Dartpedia.searchQuery('Mandela');
-    print(res?.results);
+  group('Test group for the search wiki function', () {
+    test('Query an valid string should not return null', () async {
+      var res = await Dartpedia.searchQuery('Mandela');
+      expect(res, isNot(equals(null)));
+    });
+
+    test('Query an invalid string should return null', () async {
+      var res = await Dartpedia.searchQuery('asdasdasd');
+      expect(res, equals(null));
+    });
   });
 
-  test('Using link for debug', () async {
-    var res = await Dartpedia.debugLink(
-        'en.wikipedia.org/w/api.php?action=query&srsearch=Nelson%20Mandela&utf8=&format=json');
-
-    print(res?.body);
+  group('Test group for the random wiki function', () {
+    test('Querying should never return null', () async {
+      fail('Not implemented');
+    });
   });
 }

@@ -33,7 +33,7 @@ class SearchResult {
 
   Map<String, dynamic> toMap() {
     return {
-      'pageId': pageId,
+      'pageid': pageId,
       'title': title,
       'size': size,
       'wordcount': wordcount,
@@ -43,7 +43,7 @@ class SearchResult {
 
   factory SearchResult.fromMap(Map<String, dynamic> map) {
     return SearchResult(
-      pageId: map['pageId'],
+      pageId: map['pageid'],
       title: map['title'],
       size: map['size'],
       wordcount: map['wordcount'],
