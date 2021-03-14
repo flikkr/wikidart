@@ -4,8 +4,12 @@ import 'package:dartpedia/src/model/search/search_info.dart';
 
 import 'search_result.dart';
 
-// Format: https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=Nelson%20Mandela&utf8=&format=json
 /// This class holds the response from the search query.
+/// 
+/// [success] is indicative of whether the query was a success (i.e. no error was thrown).
+/// [results] contains the query results for the given text. [offset] is used for pagination and
+/// should be provided in the search function as a parameter. [searchInfo] will contain
+/// general information about the query. [rawResponse] stores the raw json body response. 
 class SearchResponse {
   final bool success;
   final List<SearchResult>? results;

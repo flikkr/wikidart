@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+/// A data class to store search information
+/// 
+/// [totalHits] indicates the quantity of matches for the given text.
 class SearchInfo {
   final int? totalHits;
   final String? suggestion;

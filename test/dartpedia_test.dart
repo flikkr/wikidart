@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('Test group for the summary wiki function', () {
-    test('Getting the summary from Nelson Mandela wiki page', () async {
+    test('Getting the summary from Belgium wiki page', () async {
       var res = await Dartpedia.summary(3343);
       expect(res?.title, equals('Belgium'));
       expect(res?.success, isTrue);
@@ -23,7 +23,7 @@ void main() {
       expect(res?.success, isTrue);
     });
 
-    test('Query an invalid string should return null', () async {
+    test('Query an invalid string should be empty', () async {
       var res = await Dartpedia.searchQuery('asdasdasd');
       expect(res?.success, isTrue);
       expect(res?.results, isEmpty);
