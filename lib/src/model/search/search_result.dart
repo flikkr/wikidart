@@ -7,6 +7,7 @@ class SearchResult {
   final int wordcount;
   final String snippet;
 
+
   const SearchResult({
     required this.pageId,
     required this.title,
@@ -14,22 +15,6 @@ class SearchResult {
     required this.wordcount,
     required this.snippet,
   });
-
-  SearchResult copyWith({
-    int? pageId,
-    String? title,
-    int? size,
-    int? wordcount,
-    String? snippet,
-  }) {
-    return SearchResult(
-      pageId: pageId ?? this.pageId,
-      title: title ?? this.title,
-      size: size ?? this.size,
-      wordcount: wordcount ?? this.wordcount,
-      snippet: snippet ?? this.snippet,
-    );
-  }
 
   Map<String, dynamic> toMap() {
     return {
@@ -57,27 +42,6 @@ class SearchResult {
 
   @override
   String toString() {
-    return 'SearchResult(pageId: $pageId, title: $title, size: $size, wordcount: $wordcount, snippet: $snippet)';
-  }
-
-  @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-  
-    return o is SearchResult &&
-      o.pageId == pageId &&
-      o.title == title &&
-      o.size == size &&
-      o.wordcount == wordcount &&
-      o.snippet == snippet;
-  }
-
-  @override
-  int get hashCode {
-    return pageId.hashCode ^
-      title.hashCode ^
-      size.hashCode ^
-      wordcount.hashCode ^
-      snippet.hashCode;
+    return 'SearchResult(${toMap().toString()})';
   }
 }

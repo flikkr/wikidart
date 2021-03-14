@@ -7,46 +7,42 @@ import 'search_result.dart';
 // Format: https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=Nelson%20Mandela&utf8=&format=json
 /// This class holds the response from the search query.
 class SearchResponse {
+  final bool success;
   final List<SearchResult>? results;
   final int? offset;
   final SearchInfo? searchInfo;
+  final Map<String, dynamic> rawResponse;
 
   const SearchResponse({
+    required this.success,
+    required this.rawResponse,
     this.results,
     this.offset,
     this.searchInfo,
   });
-
-  SearchResponse copyWith({
-    List<SearchResult>? results,
-    int? offset,
-    SearchInfo? searchInfo,
-  }) {
-    return SearchResponse(
-      results: results ?? this.results,
-      offset: offset ?? this.offset,
-      searchInfo: searchInfo ?? this.searchInfo,
-    );
-  }
 
   Map<String, dynamic> toMap() {
     return {
       'results': results?.map((x) => x.toMap()).toList(),
       'offset': offset,
       'searchInfo': searchInfo?.toMap(),
+      'success': success,
+      'rawResponse': rawResponse,
     };
   }
 
   factory SearchResponse.fromMap(Map<String, dynamic> map) {
     return SearchResponse(
-      results: map['query']['search'] == null
+      results: map['query']?['search'] == null
           ? null
           : List<SearchResult>.from(
-              map['query']['search']?.map((x) => SearchResult.fromMap(x))),
+              map['query']?['search']?.map((x) => SearchResult.fromMap(x))),
       offset: map['offset'],
-      searchInfo: map['query']['searchinfo'] == null
+      searchInfo: map['query']?['searchinfo'] == null
           ? null
-          : SearchInfo.fromMap(map['query']['searchinfo']),
+          : SearchInfo.fromMap(map['query']?['searchinfo']),
+      rawResponse: map,
+      success: map['query']?['search'] != null,
     );
   }
 
@@ -56,6 +52,5 @@ class SearchResponse {
       SearchResponse.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'SearchResponse(results: $results, offset: $offset, searchInfo: $searchInfo)';
+  String toString() => 'SearchResponse(${toMap().toString()})';
 }

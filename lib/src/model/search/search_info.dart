@@ -33,7 +33,7 @@ class SearchInfo {
 
   factory SearchInfo.fromMap(Map<String, dynamic> map) {
     return SearchInfo(
-      totalHits: map['totalHits'],
+      totalHits: map['totalhits'],
       suggestion: map['suggestion'],
       suggestionsnippet: map['suggestionsnippet'],
     );

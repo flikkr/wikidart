@@ -8,10 +8,11 @@ import 'model/wiki_response.dart';
 /// The search function to use during the wiki search
 enum SearchType {
   nearmatch,
-  text /*title*/
+  text,
+  /*title*/
 }
 
-/// Allows you to search and query wikipedia pages. 
+/// Allows you to search and query wikipedia pages.
 class Dartpedia {
   static const String _baseUrl = 'en.wikipedia.org';
 
@@ -21,30 +22,38 @@ class Dartpedia {
   }
 
   /// Returns the summary of a wiki page
-  /// 
+  ///
   /// Query by using a [pageId] which can be obtained from [searchQuery] function.
-  /// Return null if no matching page is found. 
-  /// 
+  /// Return null if no matching page is found.
+  ///
   /// use https://en.wikipedia.org/w/api.php?action=help
-  static Future<WikiResponse?> summary(int pageId) async {
-    var res = await http.get(Uri(
-      scheme: 'https',
-      host: _baseUrl,
-      path: '/w/api.php',
-      queryParameters: {
-        'action': 'query',
-        'redirects': '1',
-        'format': 'json',
-        'prop': 'extracts|description|langlinks',
-        'exintro': '',
-        'explaintext': '',
-        'pageids': '$pageId',
-      },
-    ));
+  static Future<WikiResponse?> summary(
+    int pageId, {
+    int thumbnailWidth = 50,
+    int thumbnailLimit = 1,
+    Map<String, dynamic>? params,
+  }) async {
+    var res = await http.get(
+      Uri(
+        scheme: 'https',
+        host: _baseUrl,
+        path: '/w/api.php',
+        queryParameters: {
+          'action': 'query',
+          'redirects': '1',
+          'format': 'json',
+          'prop': 'extracts|description|langlinks',
+          'exintro': '1',
+          'explaintext': '1',
+          'pageids': '$pageId',
+          'pithumbsize': '$thumbnailWidth',
+          'pilimit': '$thumbnailLimit',
+          if (params != null) ...params,
+        },
+      ),
+    );
 
-    if (res.statusCode == 200 &&
-        json.decode(res.body)['query']['pages']['$pageId']?['missing'] ==
-            null) {
+    if (res.statusCode == 200) {
       return WikiResponse.fromJson(res.body);
     }
   }
@@ -60,7 +69,8 @@ class Dartpedia {
     String query, {
     int limit = 10,
     int offset = 0,
-    SearchType searchType = SearchType.nearmatch,
+    SearchType searchType = SearchType.text,
+    Map<String, dynamic>? params,
   }) async {
     if (query.isEmpty) throw ArgumentError.notNull();
     var res = await http.get(Uri(
@@ -77,11 +87,11 @@ class Dartpedia {
         'srinfo': 'suggestion|totalhits',
         // 'srprop': 'snippet|titlesnippet|sectiontitle|categorysnippet',
         'srwhat': searchType.toString().split('.').last,
+        if (params != null) ...params,
       },
     ));
 
-    if (res.statusCode == 200 &&
-        json.decode(res.body)['query']['search'].isNotEmpty) {
+    if (res.statusCode == 200) {
       return SearchResponse.fromJson(res.body);
     }
   }
