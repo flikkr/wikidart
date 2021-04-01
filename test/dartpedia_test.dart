@@ -3,9 +3,9 @@ import 'package:test/test.dart';
 
 void main() {
   group('Test group for the summary wiki function', () {
-    test('Getting the summary from Belgium wiki page', () async {
-      var res = await Dartpedia.summary(3343);
-      expect(res?.title, equals('Belgium'));
+    test('Getting the summary from Google wiki page', () async {
+      var res = await Dartpedia.summary(1092923);
+      expect(res?.title, equals('Google'));
       expect(res?.success, isTrue);
     });
 
@@ -18,7 +18,7 @@ void main() {
 
   group('Test group for the search wiki function', () {
     test('Query an valid string should not return null', () async {
-      var res = await Dartpedia.searchQuery('Belgium');
+      var res = await Dartpedia.searchQuery('Google');
       expect(res?.results, isNotEmpty);
       expect(res?.success, isTrue);
     });
@@ -31,8 +31,8 @@ void main() {
   });
 
   // group('Test group for the random wiki function', () {
-    // test('Querying should never return null', () async {
-    //   fail('Not implemented');
-    // });
+  // test('Querying should never return null', () async {
+  //   fail('Not implemented');
+  // });
   // });
 }
