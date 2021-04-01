@@ -30,9 +30,9 @@ void main() {
     });
   });
 
-  group('Test group for the random wiki function', () {
-    test('Querying should never return null', () async {
-      fail('Not implemented');
-    });
-  });
+  // group('Test group for the random wiki function', () {
+    // test('Querying should never return null', () async {
+    //   fail('Not implemented');
+    // });
+  // });
 }
