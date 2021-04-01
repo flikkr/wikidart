@@ -13,14 +13,19 @@ A simple usage example:
 import 'package:dartpedia/dartpedia.dart';
 
 main() {
-  var awesome = new Awesome();
+  var res = await Dartpedia.searchQuery('Google');
+  var google = await Dartpedia.summary(res?.results?.first.pageId);
+  
+  print(res?.title);        // Returns "Google"
+  print(res?.description);  // Returns "American technology company"
+  print(res?.extract);      // Returns "Google LLC is an American multinational technology company that specializes in Internet-related..."
 }
 ```
 
 ## Features
 
-- [ ] Search (id, title)
-- [ ] Summary
+- [x] Search by title
+- [x] Get summary by pageid
 - [ ] Random
 - [ ] Set page language
 
