@@ -7,18 +7,22 @@ A simple wrapper for [WikiMedia API](https://en.wikipedia.org/w/api.php) written
 
 ## Usage
 
-A simple usage example:
+A typical usage example:
 
 ```dart
 import 'package:dartpedia/dartpedia.dart';
 
 main() {
   var res = await Dartpedia.searchQuery('Google');
-  var google = await Dartpedia.summary(res?.results?.first.pageId);
-  
-  print(res?.title);        // Returns "Google"
-  print(res?.description);  // Returns "American technology company"
-  print(res?.extract);      // Returns "Google LLC is an American multinational technology company that specializes in Internet-related..."
+  var pageid = res?.results?.first.pageId;
+
+  if (pageid != null) {
+    var google = await Dartpedia.summary(pageid);
+
+    print(google?.title); // Returns "Google"
+    print(google?.description); // Returns "American technology company"
+    print(google?.extract); // Returns "Google LLC is an American multinational technology company that specializes in Internet-related..."
+  }
 }
 ```
 
