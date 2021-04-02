@@ -1,13 +1,14 @@
 name: dartpedia
 description: A Dart library for fetching data through Wikimedia API endpoints.
 version: 0.0.1
+homepage: https://github.com/flikkr/dartpedia
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   http: ^0.13.0
-  tuple: ^2.0.0-nullsafety.0
+  tuple: ^2.0.0
 
 dev_dependencies:
   pedantic: ^1.9.0
