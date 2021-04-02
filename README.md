@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 <!-- [![Pub](https://img.shields.io/pub/v/gap.svg)](https://pub.dartlang.org/packages/emoji) -->
 
-A simple wrapper for WikiMedia API written in Dart. Allows you to query and retrieve Wikipedia page information.
+A simple wrapper for [WikiMedia API](https://en.wikipedia.org/w/api.php) written in Dart. Allows you to query and retrieve Wikipedia page information.
 
 ## Usage
 
