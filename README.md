@@ -1,4 +1,4 @@
-# Dartpedia
+# Wikidart
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 <!-- [![Pub](https://img.shields.io/pub/v/gap.svg)](https://pub.dartlang.org/packages/emoji) -->
@@ -10,14 +10,14 @@ A simple wrapper for [WikiMedia API](https://en.wikipedia.org/w/api.php) written
 A typical usage example:
 
 ```dart
-import 'package:dartpedia/dartpedia.dart';
+import 'package:wikidart/wikidart.dart';
 
-main() {
-  var res = await Dartpedia.searchQuery('Google');
+Future<void> main() async {
+  var res = await Wikidart.searchQuery('Google');
   var pageid = res?.results?.first.pageId;
 
   if (pageid != null) {
-    var google = await Dartpedia.summary(pageid);
+    var google = await Wikidart.summary(pageid);
 
     print(google?.title); // Returns "Google"
     print(google?.description); // Returns "American technology company"
@@ -37,4 +37,4 @@ main() {
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
-[tracker]: https://github.com/flikkr/dartpedia/issues
+[tracker]: https://github.com/flikkr/wikidart/issues

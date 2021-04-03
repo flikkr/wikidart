@@ -1,11 +1,11 @@
-import 'package:dartpedia/dartpedia.dart';
+import 'package:wikidart/wikidart.dart';
 
 Future<void> main() async {
-  var res = await Dartpedia.searchQuery('Google');
+  var res = await Wikidart.searchQuery('Google');
   var pageid = res?.results?.first.pageId;
 
   if (pageid != null) {
-    var google = await Dartpedia.summary(pageid);
+    var google = await Wikidart.summary(pageid);
 
     print(google?.title); // Returns "Google"
     print(google?.description); // Returns "American technology company"

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:dartpedia/src/model/search/search_info.dart';
+import 'package:wikidart/src/model/search/search_info.dart';
 
 import 'search_result.dart';
 

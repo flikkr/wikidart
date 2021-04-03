@@ -1,7 +1,7 @@
-name: dartpedia
+name: wikidart
 description: A Dart library for fetching data through Wikimedia API endpoints.
 version: 0.0.1
-homepage: https://github.com/flikkr/dartpedia
+homepage: https://github.com/flikkr/wikidart
 
 environment:
   sdk: '>=2.12.0 <3.0.0'

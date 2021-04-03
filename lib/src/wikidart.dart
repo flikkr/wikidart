@@ -11,7 +11,7 @@ enum SearchType {
 }
 
 /// Allows you to search and query wikipedia pages.
-class Dartpedia {
+class Wikidart {
   static const String _baseUrl = 'en.wikipedia.org';
 
   /// Retrieve a random Wikipedia page
