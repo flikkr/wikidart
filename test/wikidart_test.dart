@@ -30,6 +30,16 @@ void main() {
     });
   });
 
+  group('Test group for the search wiki function in German', () {
+    test('Query an valid string should not return null', () async {
+      var res = await Wikidart.searchQuery('milch', lang: "de");
+      expect(res?.results, isNotEmpty);
+      expect(res?.success, isTrue);
+    });
+
+
+  });
+
   // group('Test group for the random wiki function', () {
   // test('Querying should never return null', () async {
   //   fail('Not implemented');
