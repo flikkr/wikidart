@@ -31,7 +31,7 @@ Future<void> main() async {
 - [x] Search by title
 - [x] Get summary by pageid
 - [ ] Random
-- [ ] Set page language
+- [x] Set page language
 
 ## Contributions
 
