@@ -12,7 +12,7 @@ enum SearchType {
 
 /// Allows you to search and query wikipedia pages.
 class Wikidart {
-  static const String _baseUrl = 'en.wikipedia.org';
+  static const String _baseUrl = '.wikipedia.org';
 
   /// Retrieve a random Wikipedia page
   static Future<WikiResponse?> random() async {
@@ -29,12 +29,13 @@ class Wikidart {
     int pageId, {
     int thumbnailWidth = 50,
     int thumbnailLimit = 1,
+    String lang = 'en',
     Map<String, dynamic>? params,
   }) async {
     var res = await http.get(
       Uri(
         scheme: 'https',
-        host: _baseUrl,
+        host: '$lang$_baseUrl',
         path: '/w/api.php',
         queryParameters: {
           'action': 'query',
@@ -53,6 +54,8 @@ class Wikidart {
 
     if (res.statusCode == 200) {
       return WikiResponse.fromJson(res.body);
+    } else {
+      return Future.error(res.reasonPhrase??'Error calling wiki summary');
     }
   }
 
@@ -68,12 +71,13 @@ class Wikidart {
     int limit = 10,
     int offset = 0,
     SearchType searchType = SearchType.text,
+    String lang = 'en',
     Map<String, dynamic>? params,
   }) async {
     if (query.isEmpty) throw ArgumentError.notNull();
     var res = await http.get(Uri(
       scheme: 'https',
-      host: _baseUrl,
+      host: '$lang$_baseUrl',
       path: '/w/api.php',
       queryParameters: {
         'action': 'query',
@@ -91,6 +95,8 @@ class Wikidart {
 
     if (res.statusCode == 200) {
       return SearchResponse.fromJson(res.body);
+    } else {
+      return Future.error(res.reasonPhrase??'Error calling wiki summary');
     }
   }
 }
