@@ -54,6 +54,8 @@ class Wikidart {
 
     if (res.statusCode == 200) {
       return WikiResponse.fromJson(res.body);
+    } else {
+      return Future.error(res.reasonPhrase??'Error calling wiki summary');
     }
   }
 
@@ -93,6 +95,8 @@ class Wikidart {
 
     if (res.statusCode == 200) {
       return SearchResponse.fromJson(res.body);
+    } else {
+      return Future.error(res.reasonPhrase??'Error calling wiki summary');
     }
   }
 }
